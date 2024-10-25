@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terminal Site - Ваше имя</title>
+    <title>BIO</title>
     <style>
         body {
             font-family: monospace;
@@ -16,26 +16,20 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            backdrop-filter: blur(10px);
-            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px); /* основное размытие */
+            background-color: rgba(0, 0, 0, 0.5); /* резервный полупрозрачный черный фон */
         }
         #terminal {
-            background-color: #1e1e1e;
+            background-color: #333;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
-            width: 90%;
-            max-width: 600px;
-            max-height: 90%;
-            overflow-y: auto;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
+            width: 600px;
+            max-width: 90%;
         }
         .output {
             margin-bottom: 10px;
-            color: #ffffff;
-            white-space: pre-wrap; /* Сохраняем пробелы и переносы строк */
+            color: white;
         }
         .personal-info {
             color: red;
@@ -43,10 +37,7 @@
         .command-line {
             display: flex;
             align-items: center;
-            color: #ffffff;
-            border-top: 1px solid #444;
-            padding-top: 10px;
-            margin-top: auto; /* Перемещаем командную строку вниз */
+            color: white;
         }
         .command-line-prefix {
             margin-right: 5px;
@@ -54,7 +45,7 @@
         }
         .command-input {
             flex: 1;
-            color: #ffffff;
+            color: white;
             background: none;
             border: none;
             outline: none;
@@ -62,30 +53,22 @@
             font-size: 16px;
         }
         .terminal-header {
-            background-color: #333;
+            background-color: #444;
             color: white;
             padding: 5px;
             border-radius: 10px 10px 0 0;
             text-align: left;
             font-size: 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .terminal-header .title {
-            flex: 1;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
         }
         .terminal-header .buttons {
-            display: flex;
-            gap: 5px;
+            float: right;
         }
         .terminal-header .buttons div {
+            display: inline-block;
             width: 12px;
             height: 12px;
             border-radius: 50%;
+            margin-left: 5px;
         }
         .close-btn { background-color: #ff5c5c; }
         .minimize-btn { background-color: #ffbd4c; }
@@ -97,31 +80,12 @@
         a:hover {
             text-decoration: underline;
         }
-
-        @media (max-width: 600px) {
-            #terminal {
-                width: 100%;
-                padding: 15px;
-            }
-            .command-input {
-                font-size: 14px;
-            }
-            .terminal-header {
-                padding: 8px;
-                font-size: 12px;
-            }
-            .terminal-header .buttons div {
-                width: 10px;
-                height: 10px;
-            }
-        }
     </style>
 </head>
 <body>
     <div id="terminal">
         <div class="terminal-header">
-            <span class="title">terminal Linux</span>
-            <span class="buttons">
+            terminal Linux <span class="buttons">
                 <div class="close-btn"></div>
                 <div class="minimize-btn"></div>
                 <div class="maximize-btn"></div>

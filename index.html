@@ -20,7 +20,7 @@
             background-color: rgba(0, 0, 0, 0.5);
         }
         #terminal {
-            background-color: #333;
+            background-color: #1e1e1e;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
@@ -29,10 +29,13 @@
             max-height: 90%;
             overflow-y: auto;
             box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
         }
         .output {
             margin-bottom: 10px;
-            color: white;
+            color: #ffffff;
+            white-space: pre-wrap; /* Сохраняем пробелы и переносы строк */
         }
         .personal-info {
             color: red;
@@ -40,7 +43,10 @@
         .command-line {
             display: flex;
             align-items: center;
-            color: white;
+            color: #ffffff;
+            border-top: 1px solid #444;
+            padding-top: 10px;
+            margin-top: auto; /* Перемещаем командную строку вниз */
         }
         .command-line-prefix {
             margin-right: 5px;
@@ -48,7 +54,7 @@
         }
         .command-input {
             flex: 1;
-            color: white;
+            color: #ffffff;
             background: none;
             border: none;
             outline: none;
@@ -56,7 +62,7 @@
             font-size: 16px;
         }
         .terminal-header {
-            background-color: #444;
+            background-color: #333;
             color: white;
             padding: 5px;
             border-radius: 10px 10px 0 0;
@@ -91,7 +97,7 @@
         a:hover {
             text-decoration: underline;
         }
-        
+
         @media (max-width: 600px) {
             #terminal {
                 width: 100%;

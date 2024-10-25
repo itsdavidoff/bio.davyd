@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terminal Site - Ваше имя</title>
     <style>
-        /* ... (остальные стили) ... */
         body {
             font-family: monospace;
             background-image: url("https://github.com/itsdavidoff/bio.davyd/blob/main/img/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202024-10-25%20154911.png?raw=true");
@@ -19,12 +18,72 @@
             height: 100vh;
             backdrop-filter: blur(10px);
         }
-        /* ... (остальные стили) ... */
+        #terminal {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+            width: 600px;
+            max-width: 90%;
+        }
+        .output {
+            margin-bottom: 10px;
+            color: white;
+        }
+        .personal-info {
+            color: red;
+        }
+        .command-line {
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+        .command-line-prefix {
+            margin-right: 5px;
+            color: lightgreen;
+        }
+        .command-input {
+            flex: 1;
+            color: white;
+            background: none;
+            border: none;
+            outline: none;
+            font-family: monospace;
+            font-size: 16px;
+        }
+        .terminal-header {
+            background-color: #444;
+            color: white;
+            padding: 5px;
+            border-radius: 10px 10px 0 0;
+            text-align: left;
+            font-size: 14px;
+        }
+        .terminal-header .buttons {
+            float: right;
+        }
+        .terminal-header .buttons div {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-left: 5px;
+        }
+        .close-btn { background-color: #ff5c5c; }
+        .minimize-btn { background-color: #ffbd4c; }
+        .maximize-btn { background-color: #00ca56; }
+        a {
+            color: red;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
-    <!-- Добавляем аудиофайл -->
-    <audio id="audio" src="https://github.com/itsdavidoff/bio.davyd/raw/main/On%20tha%20line%20%5BOfficial%20Music%20Video%5D.mp3" loop></audio>
+    <!-- Невидимый YouTube-плеер -->
+    <iframe id="background-music" width="0" height="0" src="https://www.youtube.com/embed/bd5l5NtzoWc?enablejsapi=1" frameborder="0" allow="autoplay"></iframe>
 
     <div id="terminal">
         <div class="terminal-header">
@@ -55,27 +114,20 @@
     <script>
         const outputContainer = document.getElementById('output-container');
         const input = document.getElementById('input');
-        const audio = document.getElementById('audio');
+        const backgroundMusic = document.getElementById('background-music');
 
         // Список команд с соцсетями и включением музыки
         const commands = {
-            'help': 'Available commands: instagram, telegram, play, stop',
+            'help': 'Available commands: instagram, telegram, play',
             'instagram': 'Instagram: <a href="https://instagram.com/davyd.vo" target="_blank">https://instagram.com/davyd.vo</a>',
             'telegram': 'Telegram: <a href="https://t.me/davydvo" target="_blank">https://t.me/davydvo</a>',
             'play': 'Playing background music...',
-            'stop': 'Music stopped.',
             'clear': 'Screen cleared'
         };
 
         // Функция для включения музыки
         function playMusic() {
-            audio.play();
-        }
-
-        // Функция для остановки музыки
-        function stopMusic() {
-            audio.pause();
-            audio.currentTime = 0; // Сбрасываем время воспроизведения
+            backgroundMusic.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
         }
 
         // Обработка команд
@@ -102,10 +154,6 @@
                         playMusic();
                         output.innerHTML = commands[command];
                         outputContainer.appendChild(output);
-                    } else if (command === 'stop') {
-                        stopMusic();
-                        output.innerHTML = commands[command];
-                        outputContainer.appendChild(output);
                     } else {
                         output.innerHTML = `visitor@your-site:~$ ${commands[command]}`;
                         outputContainer.appendChild(output);
@@ -119,11 +167,6 @@
                 outputContainer.scrollTop = outputContainer.scrollHeight; // Автопрокрутка
             }
         });
-
-        // Автоматическое воспроизведение музыки при загрузке страницы
-        window.onload = function() {
-            playMusic();
-        };
     </script>
 </body>
 </html>

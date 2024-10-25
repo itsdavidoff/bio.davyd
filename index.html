@@ -82,8 +82,11 @@
     </style>
 </head>
 <body>
-    <!-- Невидимый YouTube-плеер -->
-    <iframe id="background-music" width="0" height="0" src="https://www.youtube.com/embed/bd5l5NtzoWc?enablejsapi=1" frameborder="0" allow="autoplay"></iframe>
+    <!-- Скрытый аудиоплеер -->
+    <audio id="background-music" loop>
+        <source src="https://github.com/itsdavidoff/bio.davyd/blob/main/On%20tha%20line%20%5BOfficial%20Music%20Video%5D.mp3?raw=true" type="audio/mpeg">
+        Your browser does not support the audio tag.
+    </audio>
 
     <div id="terminal">
         <div class="terminal-header">
@@ -118,16 +121,23 @@
 
         // Список команд с соцсетями и включением музыки
         const commands = {
-            'help': 'Available commands: instagram, telegram, play',
+            'help': 'Available commands: instagram, telegram, play, stop',
             'instagram': 'Instagram: <a href="https://instagram.com/davyd.vo" target="_blank">https://instagram.com/davyd.vo</a>',
             'telegram': 'Telegram: <a href="https://t.me/davydvo" target="_blank">https://t.me/davydvo</a>',
             'play': 'Playing background music...',
+            'stop': 'Music stopped.',
             'clear': 'Screen cleared'
         };
 
         // Функция для включения музыки
         function playMusic() {
-            backgroundMusic.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            backgroundMusic.play();
+        }
+
+        // Функция для остановки музыки
+        function stopMusic() {
+            backgroundMusic.pause();
+            backgroundMusic.currentTime = 0; // Сбросить воспроизведение в начало
         }
 
         // Обработка команд
@@ -152,6 +162,10 @@
                         outputContainer.innerHTML = '';  // Очищает экран
                     } else if (command === 'play') {
                         playMusic();
+                        output.innerHTML = commands[command];
+                        outputContainer.appendChild(output);
+                    } else if (command === 'stop') {
+                        stopMusic();
                         output.innerHTML = commands[command];
                         outputContainer.appendChild(output);
                     } else {
